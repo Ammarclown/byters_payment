@@ -1,0 +1,18 @@
+use('myFirstDatabase')
+
+//db.payments.insertOne({
+  //  "price": 650,
+    //"method":"mastercard",
+    //"address":"ein shams",
+    //"cardNumber":3333
+//})
+//db.payments.updateMany({
+  //  "cardNumber":3333
+//},
+//{
+  //  "$set":{
+    //    "address":"suez"
+    //}
+//})
+//db.payments.findOne({"cardNumber":3333})
+//db.payments.deleteOne({"cardNumber":3333})
