@@ -1,54 +1,72 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
-const { mongoClient } = require('./mongo');
+//const { MongoClient } = require('./mongo');
 const req = require('express/lib/request');
+var bodyParser = require('body-parser')
+
 
 const app = express();
 app.use(express.json());
 
-const stripe= require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+const stripe= require('stripe')('sk_test_51L2vu2FhZzaRvloxWe1usDutRKmio1kpgOIkRMZA2501HbOBg2OdKd7XnuYesH8V1WUSf1Un3LeW9eVdU1a9xnnN00HDr5xCei')
 
-const storeItems = new Map([[
+const storeItems = [[
   1,{priceInCents:10000, name:'Pantene shampoo'}],
   [2, {priceInCents:20000, name:'coffee'}]
-])
+]
 
-app.post('/create-checkout-session',async (req,res) => {
-  try{
-const session =await stripe.checkout.sessions.create({
-payment_method_types:['card'],
-mode:'payment',
-line_items:req.body.items.map(item => {
-  const storeItems= storeItems.get(item.id)
-  return{
-    price_data:{
-      currency: 'usd',
-      product_data:{
-        name:storeItems.name
-      },
-      unit_amount: storeItems.priceInCents
-    },
-    quantity:item.quantity,
-  }
-}),
-success_url:`${process.env.SERVER_URL}/success.html`,
-cancel_url:`${process.env.SERVER_URL}/cancel.html`
-})
-res.json({url: session.url})
-  }catch(e){
-    res.status(500).json({error: e.message})
-  }
- 
-})
+app.post('/payment',async (req,res) => {
+  
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: "eggs",
+            },
+            unit_amount: (30*100),
+          },
+          quantity: 5,
+        },]
+      ,
+      mode: 'payment',
+      success_url: 'http://localhost:3000/success/',
+      cancel_url: 'http://localhost:3000/error/',
+    });
+    res.redirect(session.url)
+//res.json({url: session.url})
+  })
 app.get('/', async (req,res) => {
-  const db = await mongoClient();
-  if (!db) res.status(500).send('Systems Unavailable');
-
-  const { data } = await axios.get('https://goweather.herokuapp.com/weather/california');
-  await db.collection('myFirstDatabase').insertOne(data);
-
-  return res.send(data);
+ // console.log(stripe)
+  //const db = await MongoClient();
+  //if (!db) res.status(500).send('Systems Unavailable');
+  //console.log(stripe)
+  //const { data } = await axios.get('');
+  //await db.collection('myFirstDatabase').insertOne(data);
+  //return res.send(data);
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: "eggs",
+          },
+          unit_amount: (30*100),
+        },
+        quantity: 5,
+      },]
+    ,
+    mode: 'payment',
+    success_url: 'http://localhost:3000/success/',
+    cancel_url: 'http://localhost:3000/error/',
+  });
+  res.redirect(session.url)
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log(`App running on port 3000.`)
+  
+})    
