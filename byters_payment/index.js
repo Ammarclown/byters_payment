@@ -4,7 +4,7 @@ const axios = require('axios');
 //const { MongoClient } = require('./mongo');
 const req = require('express/lib/request');
 var bodyParser = require('body-parser')
-
+const port=3000 
 
 const app = express();
 app.use(express.json());
@@ -66,7 +66,6 @@ app.get('/', async (req,res) => {
   res.redirect(session.url)
 });
 
-app.listen(3000, () => {
-  console.log(`App running on port 3000.`)
-  
-})    
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+});    
