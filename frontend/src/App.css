@@ -28,6 +28,26 @@
   color: #61dafb;
 }
 
+.form{
+  margin: auto;
+  margin-top: 20%
+}
+.input{
+  padding: 10px;
+            width: 100%;
+            background-color: aquamarine;
+            color: #fff;
+            outline: 0;
+            border: 0;
+            box-shadow: 5px 5px 30px #999;
+            font-weight: bold;
+            font-size: 24px;
+            cursor: pointer;
+}
+.input:hover{
+  opacity: 0.7;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
