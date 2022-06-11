@@ -76,6 +76,16 @@ app.get('/', async (req,res) => {
   });
   res.redirect(session.url)
 });
+app.get('/trial', async (req,res) => {
+  // console.log(stripe)
+   //const db = await MongoClient();
+   //if (!db) res.status(500).send('Systems Unavailable');
+   //console.log(stripe)
+   //const { data } = await axios.get('');
+   //await db.collection('myFirstDatabase').insertOne(data);
+   //return res.send(data);
+   return res.send("success")
+ });
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
