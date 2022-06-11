@@ -4,12 +4,27 @@ const axios = require('axios');
 //const { MongoClient } = require('./mongo');
 const req = require('express/lib/request');
 var bodyParser = require('body-parser')
-const cors= require('cors')
+const cors= require('cors');
 const port=3000 
 const app = express();
 app.use(express.json());
 app.use(cors());
 const stripe= require('stripe')('sk_test_51L2vu2FhZzaRvloxWe1usDutRKmio1kpgOIkRMZA2501HbOBg2OdKd7XnuYesH8V1WUSf1Un3LeW9eVdU1a9xnnN00HDr5xCei')
+
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  // Pass to next layer of middleware
+  next(); 
+});
+
 
 
 app.get('/', async (req,res) => {
