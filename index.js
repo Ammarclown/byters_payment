@@ -9,7 +9,8 @@ const port=3000
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.cors;
+
 const stripe= require('stripe')('sk_test_51L2vu2FhZzaRvloxWe1usDutRKmio1kpgOIkRMZA2501HbOBg2OdKd7XnuYesH8V1WUSf1Un3LeW9eVdU1a9xnnN00HDr5xCei')
 
 const storeItems = [[
@@ -27,7 +28,7 @@ app.post('/payment',async (req,res) => {
             product_data: {
               name: req.body.name,
             },
-            unit_amount: (30*100),
+            unit_amount: (req.body.quantity*req.body.unit_amount*20),
           },
           quantity: req.body.quantity,
         },]
@@ -55,7 +56,7 @@ app.get('/', async (req,res) => {
           product_data: {
             name: "eggs",
           },
-          unit_amount: (30*100),
+          unit_amount: (5*40*20),
         },
         quantity: 5,
       },]
