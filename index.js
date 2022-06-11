@@ -10,7 +10,7 @@ const port=3000
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: "*"
+  origin: "https://byters-payment-ammarclown.vercel.app/payment"
 }));
 const stripe= require('stripe')('sk_test_51L2vu2FhZzaRvloxWe1usDutRKmio1kpgOIkRMZA2501HbOBg2OdKd7XnuYesH8V1WUSf1Un3LeW9eVdU1a9xnnN00HDr5xCei')
 //header('Access-Control-Allow-Origin','*');
@@ -80,6 +80,7 @@ app.post('/payment',async (req,res) => {
       success_url: 'https://byters-shipping-microservice.vercel.app/shipments/4',
       cancel_url: 'http://localhost:3000/error/',
     });
+    
     res.redirect(session.url)
 //res.json({url: session.url})
   })
