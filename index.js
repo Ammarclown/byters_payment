@@ -27,7 +27,7 @@ const stripe= require('stripe')('sk_test_51L2vu2FhZzaRvloxWe1usDutRKmio1kpgOIkRM
 
 
 
-app.post('/api/payment',async (req,res) => {
+app.post('/payment',async (req,res) => {
   
     const session = await stripe.checkout.sessions.create({
       line_items: [
