@@ -4,12 +4,11 @@ const axios = require('axios');
 //const { MongoClient } = require('./mongo');
 const req = require('express/lib/request');
 var bodyParser = require('body-parser')
-const cors= require('cors')
+//const cors= require('cors')
 const port=3000 
-
 const app = express();
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 // app.use(function (req, res, next) {
 //   // Website you wish to allow to connect
 //   res.setHeader('Access-Control-Allow-Origin', '*');
