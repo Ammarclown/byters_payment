@@ -25,12 +25,9 @@ app.use(function (req, res, next) {
 });
 const stripe= require('stripe')('sk_test_51L2vu2FhZzaRvloxWe1usDutRKmio1kpgOIkRMZA2501HbOBg2OdKd7XnuYesH8V1WUSf1Un3LeW9eVdU1a9xnnN00HDr5xCei')
 
-const storeItems = [[
-  1,{priceInCents:10000, name:'Pantene shampoo'}],
-  [2, {priceInCents:20000, name:'coffee'}]
-]
 
-app.post('/payment',async (req,res) => {
+
+app.post('/api/payment',async (req,res) => {
   
     const session = await stripe.checkout.sessions.create({
       line_items: [
