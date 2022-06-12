@@ -103,7 +103,7 @@ app.post('/payment',async (req,res) => {
       ,
       mode: 'payment',
       success_url: 'http://localhost:3000',
-      cancel_url: 'http://localhost:3000/error/',
+      cancel_url: 'http://localhost:3000',
     });
     
    // res.redirect(session.url)
