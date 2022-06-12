@@ -102,7 +102,7 @@ app.post('/payment',async (req,res) => {
         },]
       ,
       mode: 'payment',
-      success_url: 'https://byters-shipping-microservice.vercel.app/shipments/4',
+      success_url: 'http://localhost:3000',
       cancel_url: 'http://localhost:3000/error/',
     });
     
