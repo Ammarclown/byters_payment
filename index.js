@@ -4,7 +4,7 @@ const axios = require('axios');
 //const { MongoClient } = require('./mongo');
 const req = require('express/lib/request');
 var bodyParser = require('body-parser')
-const cors= require('cors');
+//const cors= require('cors');
 const { header } = require('express/lib/request');
 const port=3000 
 const app = express();
@@ -12,11 +12,7 @@ const app = express();
 
 
 const stripe= require('stripe')('sk_test_51L2vu2FhZzaRvloxWe1usDutRKmio1kpgOIkRMZA2501HbOBg2OdKd7XnuYesH8V1WUSf1Un3LeW9eVdU1a9xnnN00HDr5xCei')
-app.use(express.json());
-app.use(cors({
-  origin:'*',
-  Headers:['Content-Type','X-Auth-Token','Origin','Authorization']
-}));
+app.use(express.json())
 // app.use(function (req, res, next) {
 //   // Website you wish to allow to connect
 //   res.setHeader('Access-Control-Allow-Origin', '*');
