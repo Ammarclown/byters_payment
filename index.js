@@ -62,7 +62,30 @@ app.get('/', async (req,res) => {
 
  
 app.post('/payment',async (req,res) => {
-  
+    // try{
+    //   const email=req.body.email
+    //   const charge= await stripe.charges.create({
+    //     amount: req.body.amount,
+    //     currency:'usd',
+    //     source:'tok_mastercard',
+    //     description: 'Rabbit checkout'
+    //   });
+    //   return res.status(200).json({
+    //     success: true,
+    //     message:'payment successfull',
+    //     id: charge.id,
+    //    notification: await axios.post("",{
+    //     email,
+    //     text:"payment successfull"
+    //    })
+    //   });
+    // }catch(error){
+    //   console.log("Error",error)
+    //   return res.status(200).json({
+    //     success:false,
+    //     message:'payment failed'
+    //   })
+    // }
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -80,10 +103,22 @@ app.post('/payment',async (req,res) => {
       success_url: 'https://byters-shipping-microservice.vercel.app/shipments/4',
       cancel_url: 'http://localhost:3000/error/',
     });
-    
+    app.use(function (req, res, next) {
+      // Website you wish to allow to connect
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      // Request methods you wish to allow
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      // Request headers you wish to allow
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      // Set to true if you need the website to include cookies in the requests sent
+      // to the API (e.g. in case you use sessions)
+      res.setHeader('Access-Control-Allow-Credentials', true);
+      // Pass to next layer of middleware
+      next();
+    });
     res.redirect(session.url)
 //res.json({url: session.url})
-  })
+  });
 
 app.get('/trial', async (req,res) => {
   // console.log(stripe)
