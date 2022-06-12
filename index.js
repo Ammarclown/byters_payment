@@ -106,8 +106,8 @@ app.post('/payment',async (req,res) => {
       cancel_url: 'http://localhost:3000/error/',
     });
     
-    res.redirect(session.url)
-//res.json({url: session.url})
+   // res.redirect(session.url)
+res.json({url: session.url})
   });
 
 app.get('/trial', async (req,res) => {
