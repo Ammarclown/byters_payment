@@ -83,7 +83,7 @@ app.post('/payment',async (req,res) => {
             product_data: {
               name: req.body.name,
             },
-            unit_amount: (req.body.unit_amount),
+            unit_amount: (req.body.unit_amount*20),
           },
           quantity: req.body.quantity,
         },]
